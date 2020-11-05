@@ -1,0 +1,40 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<h1>Home</h1>
+<br>
+{% if user.is_authenticated %}
+
+
+  <div class="content-section">
+    <div class="media">
+      <br>
+      <img  src="{{ user.profile.image.url }}" width="200" height="150"/>
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+    <a href="{% url 'music_up_down_load:index' %}">Albums</a>
+    <br>
+    <p><a href="{% url 'logout' %}">logout</a></p>
+    <p><a href="{% url 'profile' %}">profile</a></p>
+    <p><a href="{% url 'song_list' %}">Song list({{ user.song_set.count }})</a></p>
+    <p><a href="{% url 'lyrics_list' %}">Lyrics list({{ user.lyrics_set.count }})</a></p>
+    <p><a href="{% url 'profile_search' %}">Search</a></p>
+
+
+
+                  <!-- FORM HERE -->
+  </div>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+
+<br>
+
+{% endblock %}
