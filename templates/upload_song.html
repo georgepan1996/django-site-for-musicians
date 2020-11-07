@@ -1,16 +1,54 @@
 {% extends 'base.html' %}
-
+{% block title %}Ανέβασμα σύνθεσης{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
 
 
-    <h1>Upload</h1>
+
+
+<div style="padding-top:100px;   " align="center" >
+
+
+    <h1 style="color:black">Ανέβασμα σύνθεσης</h1><br>
     <form method="POST" enctype="multipart/form-data" >
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Upload file</button>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+
+        <button type="submit" class="myButton">Ανέβασμα</button>
 
     </form>
 
+</div>
+
+<script>
+
+    var label = document.getElementsByTagName("LABEL");
+
+    for(var i = 0; i < label.length; i++) {
+            if(label[i].htmlFor == 'id_composition_title' ){
+                label[i].innerHTML = "Τίτλος σύνθεσης:";
+                label[i].parentNode.style.paddingRight = "80px";
+                label[i].style.fontSize = 20px;
+            }else if(label[i].htmlFor == 'id_composition' ){
+                label[i].innerHTML = "Αρχείο σύνθεσης: ";
+                label[i].parentNode.style.paddingRight = "195px";
+            }else {
+                label[i].innerHTML = "Να φαίνετε στους άλλους χρήστες ";
+                label[i].parentNode.style.paddingRight = "335px";
+            }
+
+        }
+
+
+
+</script>
+
 {% endif %}
+
+
 {% endblock %}
+
+

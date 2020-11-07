@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Διαγραφή {{song}}{% endblock %}
+{% block content %}
+<div style="padding-top:100px; height:100%; background-image: linear-gradient(rgb( 40,40,40), rgb( 0, 0, 0));" align="center">
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="color:white;padding-bottom:50px;">Είστε σιγουροι ότι θέλετε να διαγράψετε το "{{ song }}" ?</h3>
+        <input type="submit" value="Επιβεβαίωση"  class="myButton">
+        <a href="{% url 'song_list' %}" style="font-size:20px;" class="btn btn-default">Ακύρωση</a>
+    </form>
+
+</div>
+
+{% endblock %}
